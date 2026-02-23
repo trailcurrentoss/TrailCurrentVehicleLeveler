@@ -1,6 +1,6 @@
 # TrailCurrent Vehicle Leveler
 
-Vehicle leveling module that monitors trailer signals and controls leveling via a CAN bus interface with OTA firmware update capability.
+Vehicle leveling module that monitors trailer signals and controls leveling via a CAN bus interface with OTA firmware update capability. Part of the [TrailCurrent](https://trailcurrent.com) open-source vehicle platform.
 
 ## Hardware Overview
 
