@@ -1,4 +1,4 @@
-# TrailCurrent Vehicle Leveler
+# TrailCurrent Plateau
 
 Vehicle leveling module that monitors trailer signals and controls leveling via a CAN bus interface with OTA firmware update capability. Part of the [TrailCurrent](https://trailcurrent.com) open-source vehicle platform.
 
@@ -17,7 +17,7 @@ Vehicle leveling module that monitors trailer signals and controls leveling via 
 
 ### Components
 
-- **Microcontroller:** ESP32-C6-Super-Mini
+- **Microcontroller:** [Waveshare ESP32-C6-Zero](https://www.waveshare.com/esp32-c6-zero.htm?aff_id=Trailcurrent) — selected for its extensive documentation, small footprint, pre-soldered programming pins, castellations for direct PCB integration, and low power consumption
 - **CAN Transceiver:** SN65HVD230
 - **Power:** Buck converter (12V step-down)
 - **Connectors:** JST XH 2.54 4-pin
@@ -53,7 +53,7 @@ See [KICAD_ENVIRONMENT_SETUP.md](https://github.com/trailcurrentoss/TrailCurrent
 1. **Set up environment variables** (see Library Dependencies above)
 2. **Open KiCAD:**
    ```bash
-   kicad EDA/TrailCurrentVehicleLeveler/TrailCurrentVehicleLeveler.kicad_pro
+   kicad EDA/TrailCurrentPlateau/TrailCurrentPlateau.kicad_pro
    ```
 3. **Verify libraries load** - All symbol and footprint libraries should resolve without errors
 4. **View 3D models** - Open PCB and press `Alt+3` to view the 3D visualization
@@ -115,7 +115,7 @@ The firmware tracks:
 
 ```
 ├── EDA/                          # KiCAD hardware design files
-│   └── TrailCurrentVehicleLeveler/
+│   └── TrailCurrentPlateau/
 │       ├── *.kicad_pro           # KiCAD project
 │       ├── *.kicad_sch           # Schematic
 │       └── *.kicad_pcb           # PCB layout
