@@ -5,12 +5,16 @@ Vehicle leveling module that monitors trailer signals and controls leveling via 
 ## Hardware Overview
 
 - **Microcontroller:** ESP32-S3
-- **Function:** Vehicle leveling control with CAN bus communication
+- **IMU:** Adafruit BNO055 9-DOF Absolute Orientation
+- **Function:** Vehicle leveling with CAN bus communication
 - **Key Features:**
+  - BNO055 IMU for pitch/roll measurement with auto-calibration
+  - Per-corner height adjustment calculation from vehicle dimensions
+  - Three mounting orientations (floor, left wall, right wall) with axis remapping
   - CAN bus communication at 500 kbps
-  - Over-the-air (OTA) firmware updates via WiFi
+  - Vehicle configuration (dimensions, mounting) received via CAN and stored in NVS
+  - Over-the-air (OTA) firmware updates via WiFi (credentials provisioned via CAN)
   - RGB LED status indicator
-  - Trailer signal monitoring (lights, brakes, turn signals)
   - Custom flash partition layout with dual OTA slots
 
 ## Hardware Requirements
@@ -99,19 +103,11 @@ All dependencies are automatically resolved by PlatformIO during the build proce
 
 - **Receive ID `0x00`:** OTA update trigger — initiates firmware update when device hostname matches
 - **Receive ID `0x01`:** WiFi credential provisioning — multi-frame protocol to store SSID/password in NVS
-- **Transmit ID `0x30`:** Tilt data (pitch/roll)
-- **Transmit ID `0x31`:** Corner height data
-- **Transmit ID `0x32`:** Status data
+- **Receive ID `0x20`:** Leveling configuration — set mounting surface, vehicle length/width, persist to NVS
+- **Transmit ID `0x30`:** Tilt data — pitch/roll angles (×100) and front-back/left-right height diffs in mm
+- **Transmit ID `0x31`:** Corner data — per-corner height adjustments in mm (normalized, lowest = 0)
+- **Transmit ID `0x32`:** Status data — IMU connection, calibration levels, mounting orientation
 - CAN speed: 500 kbps
-
-### Trailer Signal Monitoring
-
-The firmware tracks:
-- Tail/running light status
-- Left/right turn and brake status
-- Reverse status
-- Electric brake status
-- 12V power reading
 
 ## Manufacturing
 
